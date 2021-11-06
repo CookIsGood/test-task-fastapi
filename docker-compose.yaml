@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  test-task-fastapi:
+    build: ./
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+    environment:
+      TTF_DATABASE_URL: postgresql://root:root@db/test-task-fastapi
+  db:
+    restart: always
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: test-task-fastapi
+    ports:
+      - 32700:5432
+    volumes:
+      - ./data:/var/lib/postgresql/data/pgdata
