@@ -30,7 +30,7 @@ async def shutdown():
 
 
 @app.exception_handler(RequestValidationError)
-async def validation_exception_handler(exc: RequestValidationError):
+async def validation_exception_handler(request, exc: RequestValidationError):
     new_list_errors = []
     for error in exc.errors():
         info_error = {
