@@ -3,12 +3,15 @@ version: '3.8'
 services:
   test-task-fastapi:
     build: ./
+    volumes:
+      - ./:/app
     ports:
       - 8000:8000
     depends_on:
       - db
     environment:
       TTF_DATABASE_URL: postgresql://root:root@db/test-task-fastapi
+    restart: on-failure
   db:
     restart: always
     image: postgres:latest
